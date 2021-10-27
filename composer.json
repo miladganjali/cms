@@ -1,0 +1,17 @@
+{
+    "name": "miladganjali/cms",
+    "description": "The simple cms for education perpose",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Milad",
+            "email": "miladstory@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "app\\" : "./app"
+        }
+    },
+    "require": {}
+}
