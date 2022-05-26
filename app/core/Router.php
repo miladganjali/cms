@@ -2,8 +2,6 @@
 
 namespace app\core;
 
-use Couchbase\View;
-
 class Router
 {
     public array $routes = [];
@@ -18,7 +16,7 @@ class Router
     }
 
 
-    public function get(string $path, callable|string $callback)
+    public function get(string $path, callable|string|array $callback)
     {
         $this->routes['get'][$path] = $callback;
     }
@@ -33,7 +31,12 @@ class Router
             if(is_string($callback)) {
                 echo $this->render($callback);
             } else {
-                $callback();
+                if(is_array($callback)) {
+                    $controller = new $callback[0]();
+                    echo call_user_func_array([$controller, $callback[1]], []);
+                } else {
+                    echo call_user_func_array($callback, []);
+                }
             }
         } else {
             Application::$app->response->setStatuesCode(404);
